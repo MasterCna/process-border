@@ -1,3 +1,5 @@
 # process-border
 Draw custom border for a specific process window
-![alt text](CAPTURE.png)
+
+
+![alt text](https://github.com/MasterCna/process-border/blob/master/Capture.PNG)
