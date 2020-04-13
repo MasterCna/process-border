@@ -3,4 +3,4 @@ This repository is under development, of course there is so much things todo.
 
 Screenshot:
 
-![alt text](https://github.com/MasterCna/process-border/blob/master/demo.mp4)
+![alt text](https://github.com/MasterCna/process-border/blob/master/demo.gif)
