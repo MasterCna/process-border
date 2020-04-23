@@ -1,12 +1,11 @@
-
 #include <iostream>
 #include <Windows.h>
 #include <string>
 
 
-void drawBorder(RECT rc2)
+void drawBorder(RECT rc2, std::string title, std::string text)
 {
-	HWND hHwnd = FindWindow(NULL, "Untitled - Notepad");
+	HWND hHwnd = FindWindow(NULL, title.c_str());
 	PAINTSTRUCT ps;
 	auto hdc = BeginPaint(hHwnd, &ps);
 
@@ -33,11 +32,11 @@ void drawBorder(RECT rc2)
 	SelectObject(hdesktop, font);
 	SelectObject(hdesktop, GetStockObject(NULL_BRUSH));
 
-	DrawText(hdesktop, TEXT("MasterCna"), -1, &rc2, DT_CENTER | DT_NOCLIP);
+	DrawText(hdesktop, text.c_str(), -1, &rc2, DT_CENTER | DT_NOCLIP);
 
 }
 
-int getProcessPosition(std::string processTitle)
+int getProcessPosition(std::string processTitle, std::string textOverlay)
 {
 	// Get handle of process
 	HWND hHwnd = FindWindow(NULL, processTitle.c_str());
@@ -60,13 +59,24 @@ int getProcessPosition(std::string processTitle)
 			return 1;
 		}
 
-		drawBorder(rect);
+		drawBorder(rect, processTitle, textOverlay);
 	}
+}
+
+void showUsage()
+{
+	std::cout << "\nProcessBorder.exe [Process Title] [TextOverlay]\n";
 }
 
 int main(int argc, char* argv[])
 {
-	getProcessPosition("Untitled - Notepad");
+	if (argc != 3)
+	{
+		showUsage();
+		return 1;
+	}
+
+	getProcessPosition(argv[1], argv[2]);
 
 	return 0;
 }
